@@ -1,75 +1,41 @@
-// some global consts
-const ROCK = 0, PAPER = 1, SCISSORS = 2, DRAW = 3, COMPWIN = 4, USRWIN = 5;
-let names = ['ROCK','PAPER','SCISSORS']
+let rules = {
+     logic: {
+        f1beats: 2, //by default rock beats scissors etc.
+        f2beats: 3,
+        f3beats: 1
+    },
 
-// random pick
-function getComputerChoice(){
-    // random num between 0 and 2
-    return Math.floor(Math.random() * 3)
+     names:{
+        f1name: "Paper", //we want user to be able to change those
+        f2name: "Rock",
+        f3name: "Scissors"
+    },
+    save(){
+        //.stringify() will pack the whole data object in one line
+        localStorage.setItem("logic",JSON.stringify(this.logic));
+        localStorage.setItem("names",JSON.stringify(this.names));
+    },
+    load(){
+        //if there is saved data, use it; the .parse method explodes the string back to object
+        const logic = JSON.parse(localStorage.getItem("logic"));
+        const names = JSON.parse(localStorage.getItem("names"));
+        if (logic!=null) this.logic = logic;
+        if (names!=null) this.names = names;
+    },
+    defaults(){ //for the 'restore defaults' button
+        this.logic.f1beats= 2;
+        this.logic.f2beats= 3;
+        this.logic.f3beats= 1;
+        this.names.f1name= "Paper";
+        this.names.f2name= "Rock";
+        this.names.f3name= "Scissors";
+        localStorage.removeItem("logic");
+        localStorage.removeItem("names");
+    } 
 }
-
-//user input
-function getUserChoice(userChoice = ''){
-    userChoice = userChoice.toUpperCase();
-    if(userChoice == 'ROCK'){
-        return(ROCK);
-    } else if(userChoice == 'PAPER'){
-        return(PAPER);
-    } else if(userChoice == 'SCISSORS'){
-        return(SCISSORS);
-    } else {
-        return '';
-    }
-}
-function compareChoices(user,computer){
-    // console.log(user)
-    // console.log(computer)
-    if (user == NaN|| computer == NaN){
-        console.log('Empty value.')
-        return ''
-    }
-    switch(user){
-        case(ROCK):
-            if(computer==ROCK) return DRAW;
-            if(computer==SCISSORS) return USRWIN;
-            if(computer==PAPER) return COMPWIN;
-        case(SCISSORS):
-            if(computer==ROCK) return COMPWIN;
-            if(computer==SCISSORS) return DRAW;
-            if(computer==PAPER) return USRWIN;
-        case(PAPER):
-            if(computer==ROCK) return USRWIN;
-            if(computer==SCISSORS) return COMPWIN;
-            if(computer==PAPER) return DRAW;
-        default:
-            return '';
-    }
-}
-
-let choice = NaN;
-let result = NaN;
-choice = prompt('Rock, Paper or Scissors?','')
-
-let comp = getComputerChoice()
-choice = getUserChoice(choice)
-if (choice == NaN)result=NaN
-else result = compareChoices(choice,comp);
-// console.log(result)
-switch(result){
-    case(COMPWIN):
-        console.log('You Lost! '+names[comp]+' beats '+names[choice])
-        break;
-    case(USRWIN):
-        console.log('You WON! '+names[choice]+' beats '+names[comp])
-        break
-    case(DRAW):
-        console.log('Hmm...a DRAW: '+names[choice]+' cannot beat '+names[comp])
-        break
-    default:
-        console.log('Error')
-}
-/* tests
-console.log(getComputerChoice())
-console.log(getUserChoice('papEr'))
-console.log(getUserChoice('ROck'))
-console.log(getUserChoice('scissors')) */
+console.log('test')
+rules.save();
+rules.load();
+console.log(rules.names)
+console.log(rules.logic)
+rules.defaults();

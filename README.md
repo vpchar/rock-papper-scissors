@@ -14,17 +14,20 @@ To create RSC game with:
 
 More on the features, since I am acting like the "client" right now:
 * UI
-** Responsive = looks well in different browsers/form factors
-** No images -- we'll use only CSS to do the UI
-** No backward compatibility -- not required to work on older or text browsers etc.
+..* Responsive = looks well in different browsers/form factors
+..* No images -- we'll use only CSS to do the UI
+..* No backward compatibility -- not required to work on older or text browsers etc.
 
 * Audio
-** Sounds on click/tap user choice
-** Different sounds on win/lose
+..* Sounds on click/tap user choice
+..* Different sounds on win/lose
 
 * Settings
-** Ability to change the button names (Rock,Paper...)
-** Reset to Defaults button
+..* Ability to change the button names (Rock,Paper...)
+..* Reset to Defaults button
 
 * Tests
-** Don't have an idea what to test, but have to practice testing
+..* Don't have an idea what to test, but have to practice testing
+
+* Hints:
+..why not using Quokka ;-)

@@ -50,6 +50,7 @@ let game = {
     }
 }
 
+
 //attach click events
 const buttons = document.querySelectorAll('.button');
 buttons.forEach(button =>{
@@ -66,6 +67,8 @@ const settings = document.getElementById('settings');
 const modal = document.querySelector('.modal');
 const board = document.querySelector('.board');
 const defaultBtn = document.getElementById('defaults');
+const saveBtn= document.getElementById('save');
+const cancelBtn= document.getElementById('cancel');
 
 const f1 = document.getElementById('f1');
 const f2 = document.getElementById('f2');
@@ -78,9 +81,44 @@ function closeModal(){
     modal.style.display="none";
     board.style.display="flex";
 }
+function populateView(){
+    //this sets the UI view
+    const headTitle = document.getElementById('headTitle');
+    const a = document.getElementById("a");
+    const b = document.getElementById("b");
+    const c = document.getElementById("c");
+    const a1 = document.getElementById("a1");
+    const b1 = document.getElementById("b1");
+    const c1 = document.getElementById("c1");
+    headTitle.textContent=rules.names.f1name+", "+rules.names.f2name+", "+rules.names.f3name;
+    a.textContent=a1.textContent=rules.names.f1name;
+    b.textContent=b1.textContent=rules.names.f2name;
+    c.textContent=c1.textContent=rules.names.f3name;
+}
+
+rules.load();
+populateView();
+
 defaultBtn.addEventListener('click',(e)=>{
     //restore defaults
-
+    closeModal();
+    rules.defaults();
+    populateView();
+});
+cancelBtn.addEventListener('click',(e)=>{
+    closeModal();
+});
+saveBtn.addEventListener('click',(e)=>{
+    //save settings
+    closeModal();
+    rules.names.f1name=f1.value;
+    rules.names.f2name=f2.value;
+    rules.names.f3name=f3.value;
+    rules.logic.f1beats=b1.value;
+    rules.logic.f2beats=b2.value;
+    rules.logic.f3beats=b3.value;
+    rules.save();
+    populateView();
 });
 
 settings.addEventListener('click', (e) =>{
@@ -91,7 +129,6 @@ settings.addEventListener('click', (e) =>{
     f1.value=rules.names.f1name;
     f2.value=rules.names.f2name;
     f3.value=rules.names.f3name;
-
     b1.value=rules.logic.f1beats;
     b2.value=rules.logic.f2beats;
     b3.value=rules.logic.f3beats;

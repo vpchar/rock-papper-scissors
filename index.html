@@ -50,9 +50,35 @@
        3..2..1..Pick and Click!
     </div>
     <div class="footer">
-        <button>Settings</button>
+        <button class="cancel" id="settings">Settings</button>
     </div>
 </div>
+
+<div class="modal">
+    <div class="icon">!</div>
+    <div class="box-content">
+      <div class="title">
+        <div class="head">Game Settings</div>
+      </div>
+      <div class="text">
+        <form>
+            <p><label for="f1"> 1: </label><input type="text" id="f1"></p>
+            <p><label for="f2"> 2: </label><input type="text" id="f2"></p>
+            <p><label for="f3"> 3: </label><input type="text" id="f3"></p>
+            <p><label for="bu1">1 Beats: </label><input type="text" id="bu1" size="2"></p>
+            <p><label for="bu2">2 Beats: </label><input type="text" id="bu2" size="2"></p>
+            <p><label for="bu3">3 Beats: </label><input type="text" id="bu3" size="2"></p>  
+        </form>
+      </div>
+      <div class="buttons">
+        <div>
+            <button class="continue" id="save">Save</button>
+            <button class="cancel" id="cancel">Cancel</button>
+        </div>
+        <div><button class="cancel" id="defaults">Defaults</button></div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

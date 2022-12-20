@@ -2,6 +2,9 @@
 
 The Odin Project asks me to revisit this example and add UI. OK, let's do it.
 
+# Live Preview
+https://vpchar.github.io/rock-papper-scissors/
+
 I'll add, for more complexity, my own requirements.
 
 # Goal

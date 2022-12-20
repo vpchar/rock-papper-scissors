@@ -85,6 +85,15 @@ let game = {
     }
 }
 
+//audio -- copy/paste in action from JavaScript30 example
+function playSound(e){
+    //console.log(e);
+    //--used this to find srcElement.id below
+    const audioPointer = document.querySelector(`audio[data-key="${e.srcElement.id}"]`);
+    if(!audioPointer)return;
+    audioPointer.currentTime = 0;
+    audioPointer.play();
+}
 
 //attach click events to process user input:
 const buttons = document.querySelectorAll('.button');
@@ -94,6 +103,7 @@ buttons.forEach(button =>{
     // console.log(button.id)
     button.addEventListener('click',(e)=>{
         //button.id clicked
+        playSound(e);
         game.userSelected(button.id);
         game.computerSelected();
         if (game.returnWinner()>-1){

@@ -39,6 +39,8 @@ let game = {
     userChoice: 0,
     computerChoice: 0,
     winner: 0,
+    userGames: 0,
+    computerGames: 0,
     winnerExplain:"",
     resultExplain: "",
     userSelected(e){
@@ -67,12 +69,14 @@ let game = {
         if (Object.values(rules.logic)[ this.userChoice-1 ] == this.computerChoice){
             this.winner=1;
             this.winnerExplain="You Win!";
+            this.userGames+=1;
             this.resultExplain=Object.values(rules.names)[ this.userChoice-1 ] 
                     + " beats "+Object.values(rules.names)[ this.computerChoice-1 ] 
             return 1; //you win
         } else if (Object.values(rules.logic)[ this.computerChoice-1 ] == this.userChoice){
             this.winner=2;
-            this.winnerExplain="Computer Win!";
+            this.computerGames+=1;
+            this.winnerExplain="Computer Wins!";
             this.resultExplain=Object.values(rules.names)[ this.computerChoice-1 ] 
                 + " beats "+Object.values(rules.names)[ this.userChoice-1 ] 
             return 2; //computer wins
@@ -120,12 +124,29 @@ buttons.forEach(button =>{
             else if(game.computerChoice==2 && button1.id=='b1'){button1.classList.add('selected');}
             else if(game.computerChoice==3 && button1.id=='c1'){button1.classList.add('selected');}
         });
-        result.textContent=game.winnerExplain+' -- '+game.resultExplain;
+        result.innerHTML="<strong>"+game.winnerExplain+' -- '+game.resultExplain+"</strong>"
+                        +"<br />You - "+game.userGames+ ' | '
+                        +" "+game.computerGames+" - Computer ";
+        //finalize game if > 5
+        if(game.computerGames>4 || game.userGames>4){
+            //someone won
+            if(game.computerGames>4){
+                result.innerHTML+="<br /><h1>You Lost the Game!</h1>";
+            } else {
+                result.innerHTML+="<br /><h1>You Won the Game!</h1>"
+            }
+            //final cleanup
+            game.computerGames = game.userGames = 0;
+            const audio = document.getElementById('end');
+            if(audio)audio.play();
+        }
+        //animate button clicks and  results...
         window.setTimeout(function(){
             button.classList.remove('selected');
             buttons1.forEach(button1=>{
                 button1.classList.remove('selected');
-            })
+            });
+            
         },1000);
     })
 });

@@ -32,3 +32,7 @@ More on the features, since I am acting like the "client" right now:
 * Tests
 ..* Just do it as you do it usially ;-) We will practice TDD later
 
+# To Do:
+*(bug) Settings -> Save/Defaults should it clear the current board? Or not? Changing rules in between moves...
+*(warning) Why it looks clumzy in Safari? 
+

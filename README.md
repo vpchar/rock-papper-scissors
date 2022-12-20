@@ -10,7 +10,7 @@ To create RSC game with:
 * Responsive UI -- to practice html/css
 * Audio FX (from the JavaScript30 example) -- to use something we learned in prev.step
 * Settings -- to change the way it works & save state
-* Tests -- to practice TDD
+* Tests -- old style console.log
 
 More on the features, since I am acting like the "client" right now:
 * UI

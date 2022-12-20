@@ -1,14 +1,15 @@
+
 let rules = {
      logic: {
-        f1beats: 2, 
+        f1beats: 2, //rules of the game
         f2beats: 3,
         f3beats: 1,
     },
 
      names:{
-        f1name: "Paper", //we want user to be able to change those
-        f2name: "Rock",
-        f3name: "Scissors"
+        f1name: "JavaScript", //we want user to be able to change those
+        f2name: "C++",
+        f3name: "Binary"
     },
     save(){
         //.stringify() will pack the whole data object in one line
@@ -23,12 +24,13 @@ let rules = {
         if (names!=null) this.names = names;
     },
     defaults(){ //for the 'restore defaults' button
+        //note that this is repetition of the default init. Can we optimise it?
         this.logic.f1beats= 2;
         this.logic.f2beats= 3;
         this.logic.f3beats= 1;
-        this.names.f1name= "Paper";
-        this.names.f2name= "Rock";
-        this.names.f3name= "Scissors";
+        this.names.f1name= "JavaScript";
+        this.names.f2name= "C++";
+        this.names.f3name= "Binary";
         localStorage.removeItem("logic");
         localStorage.removeItem("names");
     } 
@@ -36,6 +38,8 @@ let rules = {
 let game = {
     userChoice: 0,
     computerChoice: 0,
+    winner: 0,
+    resultExplain: "",
     userSelected(e){
         if(e === 'a') {this.userChoice = 1}
         else if(e === 'b'){ this.userChoice = 2}
@@ -47,11 +51,38 @@ let game = {
     computerSelected(){
         this.computerChoice= (Math.floor(Math.random() * 3))+1;
         //console.log(this.computerChoice)
+    },
+    returnWinner(){
+        //current user/computer choice according to logic + explain why
+        if (this.computerChoice >0 && this.computerChoice<4 && 
+            this.userChoice >0 && this.userChoice<4 ){
+                //input is OK
+            }   else { 
+                this.winner=-1;
+                this.resultExplain="";
+                return -1; //ERROR: wrong input
+            }
+        //check who wins
+        if (Object.values(rules.logic)[ this.userChoice-1 ] == this.computerChoice){
+            this.winner=1;
+            this.resultExplain=Object.values(rules.names)[ this.userChoice-1 ] 
+                    + " beats "+Object.values(rules.names)[ this.computerChoice-1 ] 
+            return 1; //you win
+        } else if (Object.values(rules.logic)[ this.computerChoice-1 ] == this.userChoice){
+            this.winner=2;
+            this.resultExplain=Object.values(rules.names)[ this.computerChoice-1 ] 
+                + " beats "+Object.values(rules.names)[ this.userChoice-1 ] 
+            return 2; //computer wins
+        } else {
+            this.winner=0;
+            this.resultExplain="No Winner"
+            return 0; //draw
+        }
     }
 }
 
 
-//attach click events
+//attach click events to process user input:
 const buttons = document.querySelectorAll('.button');
 buttons.forEach(button =>{
     // console.log(button.id)
@@ -59,6 +90,11 @@ buttons.forEach(button =>{
         //button.id clicked
         game.userSelected(button.id);
         game.computerSelected();
+        if (game.returnWinner()>-1){
+            //we have result, watch console to see how it works
+            console.log(game);
+            console.log(rules.logic)
+        }
     })
 });
 
@@ -133,3 +169,7 @@ settings.addEventListener('click', (e) =>{
     b2.value=rules.logic.f2beats;
     b3.value=rules.logic.f3beats;
 });
+
+
+
+

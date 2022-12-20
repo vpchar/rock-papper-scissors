@@ -27,7 +27,7 @@ More on the features, since I am acting like the "client" right now:
 ..* Reset to Defaults button
 
 * Tests
-..* Don't have an idea what to test, but have to practice testing
+..* Just do it as you do it usially ;-) We will practice TDD later
 
 * Hints:
 ..why not using Quokka ;-)

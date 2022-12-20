@@ -39,6 +39,7 @@ let game = {
     userChoice: 0,
     computerChoice: 0,
     winner: 0,
+    winnerExplain:"",
     resultExplain: "",
     userSelected(e){
         if(e === 'a') {this.userChoice = 1}
@@ -65,16 +66,19 @@ let game = {
         //check who wins
         if (Object.values(rules.logic)[ this.userChoice-1 ] == this.computerChoice){
             this.winner=1;
+            this.winnerExplain="You Win!";
             this.resultExplain=Object.values(rules.names)[ this.userChoice-1 ] 
                     + " beats "+Object.values(rules.names)[ this.computerChoice-1 ] 
             return 1; //you win
         } else if (Object.values(rules.logic)[ this.computerChoice-1 ] == this.userChoice){
             this.winner=2;
+            this.winnerExplain="Computer Win!";
             this.resultExplain=Object.values(rules.names)[ this.computerChoice-1 ] 
                 + " beats "+Object.values(rules.names)[ this.userChoice-1 ] 
             return 2; //computer wins
         } else {
             this.winner=0;
+            this.winnerExplain="Draw!";
             this.resultExplain="No Winner"
             return 0; //draw
         }
@@ -84,6 +88,8 @@ let game = {
 
 //attach click events to process user input:
 const buttons = document.querySelectorAll('.button');
+const buttons1 = document.querySelectorAll('.button1');
+const result = document.querySelector('.result');
 buttons.forEach(button =>{
     // console.log(button.id)
     button.addEventListener('click',(e)=>{
@@ -93,8 +99,24 @@ buttons.forEach(button =>{
         if (game.returnWinner()>-1){
             //we have result, watch console to see how it works
             console.log(game);
-            console.log(rules.logic)
+            console.log(rules.logic);
         }
+        //mark selections
+        button.classList.add('selected');
+        buttons1.forEach(button1=>{
+            //O(n*m) but who cares ;-)
+            //there is MUCH faster, proper way to do this, but let KISS
+            if(game.computerChoice==1 && button1.id=='a1'){button1.classList.add('selected');}
+            else if(game.computerChoice==2 && button1.id=='b1'){button1.classList.add('selected');}
+            else if(game.computerChoice==3 && button1.id=='c1'){button1.classList.add('selected');}
+        });
+        result.textContent=game.winnerExplain+' -- '+game.resultExplain;
+        window.setTimeout(function(){
+            button.classList.remove('selected');
+            buttons1.forEach(button1=>{
+                button1.classList.remove('selected');
+            })
+        },1000);
     })
 });
 

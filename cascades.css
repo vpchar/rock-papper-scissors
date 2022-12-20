@@ -56,6 +56,11 @@ body{
     color:black;
     cursor:pointer ;
 }
+.selected{
+    background-color: rgb(219, 217, 217);
+    transition: background-color  0.2s;
+}
+
 .result{
     border-width: 1px;
     border-style: solid;

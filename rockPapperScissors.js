@@ -110,11 +110,11 @@ buttons.forEach(button =>{
         playSound(e);
         game.userSelected(button.id);
         game.computerSelected();
-        if (game.returnWinner()>-1){
+        /*if (game.returnWinner()>-1){
             //we have result, watch console to see how it works
             console.log(game);
             console.log(rules.logic);
-        }
+        }*/
         //mark selections
         button.classList.add('selected');
         buttons1.forEach(button1=>{

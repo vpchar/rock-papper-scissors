@@ -9,11 +9,11 @@ I'll add, for more complexity, my own requirements.
 
 # Goal
 
-To create RSC game with:
+To create RPS game with:
 * Responsive UI -- to practice html/css
 * Audio FX (from the JavaScript30 example) -- to use something we learned in prev.step
 * Settings -- to change the way it works & save state
-* Tests -- old style console.log
+* Tests -- old style console.log -- planned to use Jest, but DOM+localStorage ruined my day 
 
 More on the features, since I am acting like the "client" right now:
 * UI
@@ -35,4 +35,5 @@ More on the features, since I am acting like the "client" right now:
 # To Do:
 *(bug) Settings -> Save/Defaults should it clear the current board? Or not? Changing rules in between moves...
 *(warning) Why it looks clumzy in Safari? 
+*(warning) Settings are not User-friendly in the "rules" section; better use combo-box instead of text field.
 

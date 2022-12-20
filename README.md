@@ -20,7 +20,7 @@ More on the features, since I am acting like the "client" right now:
 
 * Audio
 ..* Sounds on click/tap user choice
-..* Different sounds on win/lose
+..* Different sound on win/lose
 
 * Settings
 ..* Ability to change the button names (Rock,Paper...)
@@ -29,5 +29,3 @@ More on the features, since I am acting like the "client" right now:
 * Tests
 ..* Just do it as you do it usially ;-) We will practice TDD later
 
-* Hints:
-..why not using Quokka ;-)
